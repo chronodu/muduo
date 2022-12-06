@@ -21,7 +21,7 @@ public:
     EchoServer(EventLoop *loop,//mainloop 是用户创建的 
             const InetAddress &addr, 
             const std::string &name)
-        : server_(loop, addr, name)//创建了TCPServer对象 
+        : server_(loop, addr, name)
         , loop_(loop)
     {
         // 注册回调函数
@@ -35,7 +35,7 @@ public:
         );
 
         // 设置合适的loop线程数量 loopthread
-        server_.setThreadNum(3);//不包括baseloop
+        server_.setThreadNum(3);
     }
     void start()
     {
@@ -74,7 +74,6 @@ int main()
     EventLoop loop;
     InetAddress addr(8000);
     EchoServer server(&loop, addr, "EchoServer-01"); // Acceptor non-blocking listenfd  create bind 
-    //设置完过后调用start启动loop 
     server.start(); // listen  loopthread  listenfd => acceptChannel => mainLoop =>
     loop.loop(); // 启动mainLoop的底层Poller
 
